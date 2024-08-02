@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <main class="col-md-12">
+                <br>
+                <h2>{{viewData.student.firstName}} {{viewData.student.lastName}} - Student: {{viewData.student.studentNum}}</h2>
+                <hr />
+                <form method="post" action="/student/update">
+                    <input type="hidden" name="studentNum" value="{{viewData.student.studentNum}}" />
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                    <input class="form-control" id="firstName" name="firstName" type="text" value="{{viewData.student.firstName}}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input class="form-control" id="lastName" name="lastName" type="text" value="{{viewData.student.lastName}}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input class="form-control" id="email" name="email" type="email" value="{{viewData.student.email}}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="addressStreet">Address (Street):</label>
+                                    <input class="form-control" id="addressStreet" name="addressStreet" type="text" value="{{viewData.student.addressStreet}}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="addressCity">Address (City):</label>
+                                    <input class="form-control" id="addressCity" name="addressCity" type="text" value="{{viewData.student.addressCity}}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="addressProvince">Address (Province):</label>
+                                    <input class="form-control" id="addressProvince" name="addressProvince" type="text" value="{{viewData.student.addressProvince}}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="TA">TA:</label>
+                                    <input class="form-control" id="TA" name="TA" type="checkbox" {{#if viewData.student.TA}}checked{{/if}} />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Status:</label>
+                                    <div>
+                                        <input type="radio" id="fullTime" name="status" value="Full Time" {{#equal viewData.student.status "Full Time"}}checked{{/equal}} /> Full Time
+                                        <input type="radio" id="partTime" name="status" value="Part Time" {{#equal viewData.student.status "Part Time"}}checked{{/equal}} /> Part Time
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="course">Course:</label>
+                                    {{#if viewData.courses}}
+                                    <select class="form-control" id="course" name="course">
+                                        <option value="">Select Course</option>
+                                        {{#each viewData.courses}}
+                                        <option value="{{this.courseId}}" {{#if this.selected}} selected {{/if}}>{{this.courseCode}}</option>
+                                        {{/each}}
+                                    </select>
+                                    {{else}}
+                                    <div>No courses available</div>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <hr />
+                    <input type="submit" class="btn btn-primary float-right" value="Update Student" /><br /><br /><br />
+                </form>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
